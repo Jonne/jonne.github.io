@@ -5,13 +5,13 @@ GEM
     jekyll-paginate (1.1.0)
     jekyll-watch (1.4.0)
       listen (~> 3.0, < 3.1)
+    kramdown (1.11.1)
     listen (3.0.6)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9.7)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
-    redcarpet (3.3.4)
     rouge (1.10.1)
     wdm (0.1.1)
 
@@ -21,7 +21,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll-paginate
   jekyll-watch
-  redcarpet
+  kramdown
   rouge
   wdm (~> 0.1.0)
 
