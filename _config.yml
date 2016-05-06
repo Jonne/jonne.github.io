@@ -1,11 +1,11 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: Jonne Kats
+description: "Blogging about Software development, .NET, Architecture, etc." 
+meta_description: "Jonne Kats's blog about software development"
 
-aboutPage: true
+aboutPage: false
 
 markdown: redcarpet
-highlighter: pygments
+highlighter: rouge
 
 paginate: 20
 baseurl: /
@@ -16,7 +16,7 @@ disqus_shortname: 'your-disqus-shortname'
 
 # Details for the RSS feed generator
 url:            'http://your-blog-url.example.com'
-author:         'Your Name'
+author:         'Jonne Kats'
 authorTwitter:  'YourTwitterUsername'
 
 permalink:       /:year/:title/
@@ -40,3 +40,5 @@ defaults:
             type: drafts
         values:
             layout: post
+
+gems: ["jekyll-paginate"]
