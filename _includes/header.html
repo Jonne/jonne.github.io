@@ -1,6 +1,6 @@
 <header id="menu">
     <img id="avatar" class="2x" src="{{ site.baseurl }}assets/images/avatar.png"/>
-    <h1><a href="{{ site.baseurl }}/index.html">{{ site.title }}</a></h1>    
+    <h1><a href="/">{{ site.title }}</a></h1>    
     <p class="description">{{ site.description }}</p>
     <div>
         <a href="https://nl.linkedin.com/pub/jonne-kats/1/842/987">
@@ -13,7 +13,7 @@
     </div>      
     <nav id="nav">
         <ul>
-        <li><a href="/index.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         {% for my_page in site.pages %}
         {% if my_page.title %}
         <li><a href="{{ my_page.url }}">{{ my_page.title }}</a></li>
