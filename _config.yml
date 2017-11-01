@@ -41,4 +41,4 @@ defaults:
         values:
             layout: post
 
-gems: ["jekyll-paginate"]
+plugins: ["jekyll-paginate"]

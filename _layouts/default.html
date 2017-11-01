@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="stylesheet" href="/assets/css/social.css" />
   <link rel="stylesheet" href="/assets/css/syntax.css" />
+
+  {% if page.canonical %}
+  <link rel="canonical" href="{{ page.canonical }}"/>
+  {% endif %}
+  
   <title>{{ site.title }}</title>
 
 </head>
