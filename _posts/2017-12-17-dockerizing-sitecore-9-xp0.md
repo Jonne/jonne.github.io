@@ -4,6 +4,7 @@ title:  "Dockerizing Sitecore 9 XP0"
 date: 2017-12-17 13:21
 author: jonnekats
 comments: true
+keywords: Sitecore 9, Docker, Commerce, Sitecore
 categories: [Sitecore]
 ---
 Sitecore eXperience Commerce 9 is expected to be released in Q1 of 2018. This new version will contain no more COM+ components and is build on .NET core. This means that we should be able to run it on Docker! To get ready for that I wanted to see if I could get the Sitecore 9 xp0 topology running on Docker. Per Manniche Bering, who knows a lot more about Docker than I do, already has Sitecore 9 XM1 running on Docker in [this repository](https://github.com/pbering/sitecore-nine-docker). So I wanted to see if I could use his work and add the services needed for xp0. Currently, I got most of it running on docker and will share the repository shortly. For now, I wanted to share some lessons I learned during the process and hopefully safe people some time. As a disclaimer, I am by no means a Docker or infrastructure expert. Any feedback is more than welcome! 

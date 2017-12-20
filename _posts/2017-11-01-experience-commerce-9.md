@@ -2,6 +2,7 @@
 layout: post
 title:  "Sitecore Experience Commerce 9"
 canonical: https://mercury-ecommerce.com/tech/sitecore-experience-commerce-9
+keywords: Sitecore 9, Commerce 9, Mercury
 description: Goodbye old Commerceserver code, hello new Commerce engine.
 date: 2017-11-01 10:21
 author: jonnekats
