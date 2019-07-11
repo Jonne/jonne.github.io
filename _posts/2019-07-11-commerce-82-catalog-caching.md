@@ -44,7 +44,7 @@ The Sitecore data API caches the product data in the same it does normal items, 
 
 The Sitecore data API has no expiration and caches items as long as they are valid (Based on published period). Specific items are removed from the cache when an `ItemSavedEvent` is queued in the EventQueue (This happens when the related items are published). This cache is also cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
-## CommerceCacheRefreshEvent
+**What is this CommerceCacheRefreshEvent you've mentioned?**
 The `CommerceCacheRefreshEvent` mentioned above is used to make sure that the related caches on all servers are cleared when a change is made on one of the servers. This event is essential for the commerce cached to stay consistent. This event is used to clear different types of caches. The event has a CacheType that can contain the following values:
 
 - "sitecore" - If the event also contains an ItemID, the invidual item is removed from the sitecore caches. If not, the entire sitecore cache is cleared. 
@@ -52,8 +52,7 @@ The `CommerceCacheRefreshEvent` mentioned above is used to make sure that the re
 - "allcaches" - All sitecore and commerce caches are cleared
 - "commercecaches" - All sitecore and commerce caches are cleared, except for the catalog cache
 
-**When is the CommerceCacheRefreshEvent queued?**
-
+**When is this CommerceCacheRefreshEvent queued?**
 This event is queued when changes are made using the merchandising manager. 
 
 The event is also queued during an incremental index update. When items in the catalog are updated the `CatalogIntervalAsynchronousStrategy` will retrieve a list of modified catalog items from the ExternalId table. It will then queue a `CommerceCacheRefreshEvent` with CacheType catalogcache. This will make sure that the entire catalog cache is cleared on every server. After this, it will queue `CommerceCacheRefreshEvent` with CacheType sitecore and an ItemID for every catalog item, which makes sure that the catalog item is removed from the sitecore cache from every server. 
