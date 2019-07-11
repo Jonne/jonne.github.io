@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Sitecore Commerce 82(1) cache invalidation explained"
+title:  "Sitecore Commerce 8.2 cache invalidation explained"
 date: 2019-02-25 13:21
 author: jonnekats
 comments: true
@@ -11,7 +11,7 @@ For one of our Sitecore Commerce customers it is really important that product u
 
 The catalog data is cached on the following levels:
 
-![Caching layers](../assets/images/commerce-caching/cachinglayers.gif)
+![Caching layers](/assets/images/commerce-caching/cachinglayers.gif)
 
 ### Commerce Server
 The catalog data is cached in the `CatalogCache`, which basically caches all the datasets that are retrieved from the database.  
@@ -44,7 +44,7 @@ The Sitecore data API caches the product data in the same it does normal items, 
 
 The Sitecore data API has no expiration and caches items as long as they are valid (Based on published period). Specific items are removed from the cache when an `ItemSavedEvent` is queued in the EventQueue (This happens when the related items are published). This cache is also cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
-# CommerceCacheRefreshEvent
+## CommerceCacheRefreshEvent
 The `CommerceCacheRefreshEvent` mentioned above is used to make sure that the related caches on all servers are cleared when a change is made on one of the servers. This event is essential for the commerce cached to stay consistent. This event is used to clear different types of caches. The event has a CacheType that can contain the following values:
 
 - "sitecore" - If the event also contains an ItemID, the invidual item is removed from the sitecore caches. If not, the entire sitecore cache is cleared. 
