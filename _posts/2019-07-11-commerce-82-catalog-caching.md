@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Sitecore Commerce 8.2 cache invalidation explained"
-date: 2019-02-25 13:21
+date: 2019-07-11 16:48
 author: jonnekats
 comments: true
 keywords: Sitecore 82, commerce, cache, invalidation, explained
@@ -23,11 +23,11 @@ The commerce server catalog cache uses an expiration that is defined in the `App
 Besides the expiration the entire catalog cache is cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
 ### Sitecore Commerce Connect
-Commerce connect has an ExternalIdCache and a TemplateHierarchyCache. The ExternalIdCache caches the mapping between the SitecoreId of a catalog item and the productid/categoryid. The TemplateHierarchyCache caches the sitecore templates which are generated based on the category and product definitions. 
+Commerce connect has an `ExternalIdCache` and a `TemplateHierarchyCache`. The `ExternalIdCache` caches the mapping between the SitecoreId of a catalog item and the productid/categoryid. The `TemplateHierarchyCache` caches the sitecore templates which are generated based on the category and product definitions. 
 
 **When cleared?**
 
-The ExternalIdCache and a TemplateHierarchyCache in Sitecore commerce connect have no expiration. 
+Both caches in Sitecore commerce connect have no expiration. 
 
 The entire ExternalIdCache and TemplateHierarchyCache are cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
