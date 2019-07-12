@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Sitecore Commerce 8.2 cache invalidation explained"
+title:  "Sitecore Commerce 8.2 catalog cache details"
 date: 2019-07-11 16:48
 author: jonnekats
 comments: true
@@ -23,16 +23,16 @@ The commerce server catalog cache uses an expiration that is defined in the `App
 Besides the expiration the entire catalog cache is cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
 ### Sitecore Commerce Connect
-Commerce connect has an `ExternalIdCache` and a `TemplateHierarchyCache`. The `ExternalIdCache` caches the mapping between the SitecoreId of a catalog item and the productid/categoryid. The `TemplateHierarchyCache` caches the sitecore templates which are generated based on the category and product definitions. 
+Commerce connect has an `ExternalIdCache` and a `TemplateHierarchyCache`. The `ExternalIdCache` caches the mapping between the SitecoreId of a catalog item and the productid/categoryid. The `TemplateHierarchyCache` caches the sitecore templates which are generated based on the category and product definitions. Both of these are not important if mere product or catalog data has been changed.
 
 **When cleared?**
 
 Both caches in Sitecore commerce connect have no expiration. 
 
-The entire ExternalIdCache and TemplateHierarchyCache are cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
+The entire `ExternalIdCache` and `TemplateHierarchyCache` are cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
 ### Sitecore
-The Sitecore data API caches the product data in the same it does normal items, which is in the following caches:
+The Sitecore data API caches the product data in the same way it does normal items, which is in the following caches:
 
 - ItemCache
 - DataCache
@@ -42,7 +42,7 @@ The Sitecore data API caches the product data in the same it does normal items, 
 
 **When cleared?**
 
-The Sitecore data API has no expiration and caches items as long as they are valid (Based on published period). Specific items are removed from the cache when an `ItemSavedEvent` is queued in the EventQueue (This happens when the related items are published). This cache is also cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
+The Sitecore data API cache has no expiration and items are cached as long as they are valid (Based on published period). Specific items are removed from the cache when an `ItemSavedEvent` is queued in the EventQueue (This happens when the related items are published). This cache is also cleared when a `CommerceCacheRefreshEvent` is queued in the EventQueue.  
 
 ### Output cache
 If the renderings on the page have caching enabled, the resulting output of those renderings will be cached in the output cache. 
@@ -50,6 +50,8 @@ If the renderings on the page have caching enabled, the resulting output of thos
 **When cleared?**
 
 By default the renderings in the output cache have no expiration. The entire output cache is cleared when a publish action takes place. This is done by the `Sitecore.Publishing.HtmlCacheClearer, Sitecore.Kernel` event handler configured in the `publish:end:remote` event. 
+
+To make sure the output cache reflects the catalog changes in a timely fashion, this client has extended the output caching mechanism. They've added a `VaryByProductData` option that adds the product version to the generated cache key, similar to: [http://www.sitecorecoding.com/2016/02/caching-rendering-html-when-conditional.html](http://www.sitecorecoding.com/2016/02/caching-rendering-html-when-conditional.html).
 
 > Clearing the HTML cache can have a serious impact on performance. It's considered best practise to disable the event handler and periodically clear the HTML cache using the `HtmlCacheClearAgent`.
 
