@@ -60,6 +60,6 @@ In the case of certificate authentication the roles are configured in the `confi
 
 
 ## Bearer token authentication
-When the client is authentication with bearer authentication the token will contain the roles of the user in its claims. When the user logs in using Identity Server, Identity Server will retrieve the users roles from the core database and return them in the token.
+When the client is authenticated with bearer authentication the token will contain the roles of the user in its claims. When the user logs in using Identity Server, Identity Server will retrieve the users roles from the core database and return them in the token.
 
 ![Bearer authorization](/assets/images/sxc9-security/bearerauthorization.jpg)
