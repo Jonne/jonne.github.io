@@ -27,7 +27,7 @@ This endpoint is used by the business tools. When the user opens the business to
 ![Authentication overview](/assets/images/sxc9-security/overview.jpg))
 
 # Authorization
-Authorization in the commerce engine is based on uses roles and controller actions. This is configured in the `Core.ControllerMethodRoles.PolicySet-1.0.0.json` policy file, which content contains elements that look like the following:
+Authorization in the commerce engine is based on user roles and controller actions. This is configured in the `Core.ControllerMethodRoles.PolicySet-1.0.0.json` policy file, which content contains elements that look like the following:
 
 ``` JSON
       {
