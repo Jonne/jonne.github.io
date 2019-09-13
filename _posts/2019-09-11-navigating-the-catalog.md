@@ -7,11 +7,11 @@ comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
 categories: [Sitecore]
 ---
-In [part 1](../exposing-the-commerce-engine) I described how we chose to expose the commerce engine in our JSS commerce experiment. In this part I will talk about how we implemented catalog navigation. 
+In [part 1](../exposing-the-commerce-engine) I described how we chose to expose the Commerce Engine in our JSS commerce experiment. In this part I will talk about how we implemented catalog navigation. 
 
-As discussed in part 1, we decided to expose the commerce engine using an API gateway instead of creating a custom endpoint. This also means that we don't go through Sitecore commerce connect. We could choose to also access the catalog commerce engine API directly from JSS, but how would the content editor be able to use the experience editor to edit category and product pages? For this reason, we chose to still use the data provider that is part of commerce connect. 
+As discussed in part 1, we decided to expose the Commerce Engine using an API gateway instead of creating a custom endpoint. This also means that we don't go through Sitecore Commerce Connect. We could choose to also access the catalog Commerce Engine API directly from JSS, but how would the content editor be able to use the experience editor to edit category and product pages? For this reason, we chose to still use the data provider that is part of Commerce Connect. 
 
-When you install commerce connect, the catalog data provider is available at the following location:
+When you install Commerce Connect, the catalog data provider is available at the following location:
 
 ![catalog structure](/assets/images/navigating-the-catalog/catalog-location.jpg)
 
