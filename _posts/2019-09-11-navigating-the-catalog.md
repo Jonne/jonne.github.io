@@ -29,7 +29,7 @@ You can now add standard values for the custom template and configure the presen
 
 <iframe src="https://giphy.com/embed/A5cMONNFFwPgA" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/A5cMONNFFwPgA">via GIPHY</a></p>
 
-This is because JSS will try to serialize the current Sitecore item and all items it references. Because a catalog will contain product relations this process will try to serialize the entire catalog and eventually end up in an infinte loop. To work around this we chose only to serialize a products relations one level deep by replacing the `GetMultilistFieldSerializer` with the following:
+This is because JSS will try to serialize the current Sitecore item and all items it references. Because a catalog will contain product relations this process will try to serialize the entire catalog and eventually end up in an infinite loop. To work around this we chose only to serialize a products relations one level deep by replacing the `GetMultilistFieldSerializer` with the following:
 
 ``` csharp
     public class ProductExcludingMultilistFieldSerializer : BaseFieldSerializer
