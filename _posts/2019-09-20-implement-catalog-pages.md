@@ -7,7 +7,7 @@ comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
 categories: [Sitecore]
 ---
-In this part I will decribe how we implemented the catalog pages. In [part 2](../implement-catalog-pages) I talked about how we implemented navigation with JSS & commerce. However, this only described how we implemented url navigation, e.g. how a URL is mapped to a commerce catalog item. This time we will focus on implementing a category menu, the category page and the product page.
+In this part I will decribe how we implemented the catalog pages. In [part 2](../navigating-the-catalog) I talked about how we implemented navigation with JSS & commerce. However, this only described how we implemented url navigation, e.g. how a URL is mapped to a commerce catalog item. This time we will focus on implementing a category menu, the category page and the product page.
 
 ## Category menu
 The category menu is a list of categories that we want to display on all pages and which allows the visitor to navigate the categories in the catalog (A screenshot can be found at the end of this paragraph). We decided to implement a 2-level category menu (similar to the SXA storefront), meaning there will be two components. The first component will display the categories on a configurable level. The second component will display the child categories of the currently selected category of the other component. 
