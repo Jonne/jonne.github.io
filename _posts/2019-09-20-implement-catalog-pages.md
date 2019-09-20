@@ -7,10 +7,12 @@ comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
 categories: [Sitecore]
 ---
-In this part I will decribe how we implemented the catalog pages. In [part 3](../implement-catalog-pages) I talked about how we implemented navigation with JSS & commerce. However, this only described how we implemented url navigation, e.g. how a URL is mapped to a commerce catalog item. This time we will focus on implementing a category menu, the category page and the product page.
+In this part I will decribe how we implemented the catalog pages. In [part 2](../implement-catalog-pages) I talked about how we implemented navigation with JSS & commerce. However, this only described how we implemented url navigation, e.g. how a URL is mapped to a commerce catalog item. This time we will focus on implementing a category menu, the category page and the product page.
 
 ## Category menu
-We decided to implement a 2 level category menu, similar to the SXA storefront. We scaffolded a new category JSS component by running `jss scaffold CategoryMenu`. This component will render a list of categories that it will receive through the props. 
+The category menu is a list of categories that we want to display on all pages and which allows the visitor to navigate the categories in the catalog (A screenshot can be found at the end of this paragraph). We decided to implement a 2-level category menu (similar to the SXA storefront), meaning there will be two components. The first component will display the categories on a configurable level. The second component will display the child categories of the currently selected category of the other component. 
+
+We scaffolded a new category JSS component by running `jss scaffold CategoryMenu`. This component will render a list of categories that it will receive through the props. 
 
 ``` javascript
 import React from 'react';
@@ -44,9 +46,9 @@ const CategoryNavigation = ({fields}) => {
 export default CategoryNavigation;
 ```
 
-Make sure to use the `NavLink` component from react-router for the links. If not a full page refresh will be done when clicking the link. With the NavLink component only an asynchronous request will be done to the layout service. 
+Make sure to use the `NavLink` component from react-router for the links. If not, a full page refresh will be done when clicking the link. With the NavLink component only an asynchronous request will be done to the layout service, giving the visitor a much smoother experience.
 
-To get the categories we chose to create a custom [content resolver](https://jss.sitecore.com/docs/techniques/extending-layout-service/layoutservice-rendering-contents). The categories will be the child categories of a starting point in the catalog. This will be configurable using the datasource of the rendering. 
+To retrieve the categories, we chose to create a custom [content resolver](https://jss.sitecore.com/docs/techniques/extending-layout-service/layoutservice-rendering-contents), named `CategoryNavigationContentResolver`. As mentioned before, it should be configurable what categories to show. To do this, we have added a `Starting Point` field of type `DropTree` to the datasource template of the rendering, that allows the content editor to select a location in the catalog.
 
 ![category starting point](/assets/images/implement-catalog-pages/startingpoint.jpg)
 
@@ -108,12 +110,14 @@ To get the categories we chose to create a custom [content resolver](https://jss
         }
     }
 ```
-The Subcategory navigation control looks similar, but has a different content resolver. That content resolver will use the `Sitecore.Context.Item` as a parent category instead of the configurable starting location. Other than that its the same.
+The Subcategory navigation control looks similar, but has a different content resolver. This content resolver will use the `Sitecore.Context.Item` as a parent category instead of the configurable starting location. Other than that its the same.
+
+Seeing both components in action:
 
 ![category navigation](/assets/images/implement-catalog-pages/categorynavigation.jpg)
 
 ## Product page
-On the product page we wanted to display basic product information: title, description, image and price. JSS components usually get their data from a dedicated data source item. For the product detail components we want the components to get the data from the current sitecore item: `Sitecore.Context.Item`. To access this data from your component you need to use the `withSitecoreContext` higher order component. For example, the component to display the product title looks like this:
+On the product page we wanted to display basic product information: title, description, image, price and an add-to-cart button. Joost already talked about the add-to-cart button in [part 3 of this series](https://joost.meijles.com/jss_cart_actions/), so I will focus on the other components here. JSS components usually get their data from a dedicated data source item. For the product detail components we want the components to get the data from the current Sitecore item: `Sitecore.Context.Item`. To access this data from your component you need to use the `withSitecoreContext` higher order component. For example, the component to display the product title looks like this:
 
 ``` javascript
 import React from 'react';
@@ -161,7 +165,7 @@ export default withSitecoreContext()(DefaultProductImage);
 
 ### Product price
 
-Displaying the price turned out to also be more challenging. The sitecore product item does not include a list price and you need to invoke the Commerce Engine API to get this. One of the benefits of retrieving the list price asynchronously is that the entire page can be cached, while the price can be dynamic. The list price is included in the sellable item API and we can retrieve it by doing a GET on the flollowing url: `${gatewayUrl}/api/catalog/${productCatalog}/sellableitems/${productId}`. We created a custom React hook to get the live price of a product: 
+Displaying the price also turned out to be more challenging. The sitecore product item does not include a list price and you need to invoke the Commerce Engine API to get this. One of the benefits of retrieving the list price asynchronously is that the entire page can be cached, while the price can be dynamic. The list price is included in the sellable item API and we can retrieve it by doing a GET on the flollowing url: `${gatewayUrl}/api/catalog/${productCatalog}/sellableitems/${productId}`. We created a custom React hook to get the live price of a product: 
 
 ``` javascript
 import { useState, useEffect } from 'react';
@@ -298,4 +302,8 @@ export default GraphQLData(GetProductsQuery, { name: 'getProductsQuery' })(Produ
 
 ```
 
+> Retrieving the products with the Items GraphQL endpoint is quite slow. An alternative worth investigating is trying to use the content search GraphQL endpoint.
+
 ![category page](/assets/images/implement-catalog-pages/categorypage.jpg)
+
+This is starting to look like a real shop! JSS gives us a lot of flexibility and allowed us to quickly iterate on the front-end development. The real challenge is to figure out how to get the data in the JSS components. This got easier once we got the hang of how to use content resolvers and GraphQL queries.
