@@ -8,6 +8,8 @@ categories: [Sitecore, React]
 ---
 Last year we started the development of Mercury, which is a generic E-commerce solution based on Sitecore & Commerce server. Learn more about Mercury [here](http://mercury-ecommerce.com). Over the years we have gained a lot of experience building E-commerce solutions. One of the things we wanted to do better with Mercury was to improve the User Experience, by using more client-side technology and by optimizing our usage of the browsers. This led us to find a client-side technology that would best fit our requirements.  These days the amount of JavaScript frameworks is overwhelming, but in the end we went for Facebook’s React. In this article you will learn why. 
 
+<!--more-->
+
 ## React
 React JS is a JavaScript framework for developing complex User Interfaces. It is developed by Facebook and has gotten a lot of publicity and momentum in the last couple of years. The first version of React was open sourced in 2013 and is currently being used by sites like Netflix, AirBNB, Twitter and Facebook itself. Why are more and more of these sites going for React?
 

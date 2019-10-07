@@ -9,6 +9,17 @@ categories: [Sitecore]
 ---
 In the past 6 parts of this JSS Commerce series Joost Meijles and me described our experiences developing a basic Sitecore Commerce website with JSS ([Sitecore JavaScript Services](https://jss.sitecore.com)). Most of the articles describe how we implemented a certain feature and why we did it that way. Now that we finished the experiment, we can look back and evaluate using JSS for Sitecore Commerce in a more general way. We will do this by asking ourselves a couple of questions.
 
+<!--more-->
+
+> JSS Commerce parts:
+1. [Exposing the Commerce Engine](/2019/exposing-the-commerce-engine/)
+2. [Navigating the catalog](/2019/navigating-the-catalog/)
+3. [Cart actions](https://joost.meijles.com/jss_cart_actions/) - Joost Meijles
+4. [Tracking Cart events](https://joost.meijles.com/jss_tracking_commerce/) - Joost Meijles
+5. [Implementing catalog pages](/2019/implement-catalog-pages/)
+6. [Creating a product cluster](https://joost.meijles.com/jss_product_cluster/) - Joost Meijles
+7. **Conclusion** 
+
 ## Do you prefer JSS to the more traditional Sitecore MVC approach for commerce websites?
 Modern E-commerce websites offer a lot of functionality and need to be interactive in order to engage the customer. This requires running JavaScript in the browser. Adding some JavaScript to a Sitecore MVC implementation is fine, but at a certain amount it will get complex and hard to manage. Code runs in two different places: the ASP.NET code on the server and the JavaScript on the browser. Developers have to keep these two different world in mind when developing the application. The JavaScript code usually needs the MVC server to run, making it hard to test in isolation and result in slow development feedback loops. This is where JSS can really shine. It works really well for sites that need a lot of interaction. It offers quick development feedback loops, because front-end developers can work disconnected and don't need a running Sitecore server. Though one thing we noticed is that you generally need a lot of async calls to the server with Commerce sites, which will break JSS disconnected mode. This can be solved by adding custom stubs. 
 

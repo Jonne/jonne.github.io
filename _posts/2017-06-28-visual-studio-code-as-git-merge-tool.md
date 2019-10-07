@@ -12,6 +12,8 @@ has gotten build in support for merging. Before, I was using Diffmerge as my mer
 find the 3-way merge view with the remote, base and local files a bit confusing. Visual Studio Code just 
 shows one file and shows the differences inline:
 
+<!--more-->
+
 ![](/assets/images/codemerge.png)
 
 Configuring Visual Studio Code as your GIT merge tool can be a bit confusing. Code already had the ability

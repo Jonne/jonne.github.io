@@ -9,6 +9,8 @@ categories: [Sitecore]
 ---
 Authentication with SXC9 is available in the online documentation, but how does authorization work? And how can you add authorization to your own controller methods? 
 
+<!--more-->
+
 # Authentication
 As stated by the [SXC9 documentation](https://doc.sitecore.com/developers/91/sitecore-experience-commerce/en/authentication.html), there are two ways to authenticate with the commerce engine.
 
