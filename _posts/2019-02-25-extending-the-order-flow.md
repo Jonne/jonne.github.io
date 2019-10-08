@@ -9,6 +9,8 @@ categories: [Sitecore]
 ---
 The default Sitecore eXperience Commerce order flow is quite generic and although it is not documented, it is possible to modify it. In this post I will share how to add a custom order state.
 
+<!--more-->
+
 ## Default order flow
 
 The out-of-the-box order flow looks like the following:

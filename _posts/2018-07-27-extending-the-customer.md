@@ -9,6 +9,8 @@ categories: [Sitecore]
 ---
 Multiple times I've seen people ask how to extend a SXC9 customer on the sitecore commerce slack channel. Suprisingly, it seems that this is not documented anywhere. We have already done this in our projects at Aviva Solutions, so I decided to write down how we do this. Full credits need to go to my colleague [Joost Meijles](https://twitter.com/joostmeijles), who figured this all out. 
 
+<!--more-->
+
 Like all commerce entities, to extend the customer you first need to create a custom component that will contain your custom field(s). For example, lets extend the customer with a title. 
 
 ``` csharp

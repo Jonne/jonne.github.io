@@ -9,6 +9,17 @@ categories: [Sitecore]
 ---
 This is the first article of a multi-part series in which my colleague Joost Meijles and I will share our experiences developing a Sitecore JSS site on top of Sitecore Commerce. In this part I will discuss the first challenge we faced: how to expose the Commerce Engine to JSS.
 
+<!--more-->
+
+> JSS Commerce parts:
+1. **Exposing the Commerce Engine**
+2. [Navigating the catalog](/2019/navigating-the-catalog/)
+3. [Cart actions](https://joost.meijles.com/jss_cart_actions/) - Joost Meijles
+4. [Tracking Cart events](https://joost.meijles.com/jss_tracking_commerce/) - Joost Meijles
+5. [Implementing catalog pages](/2019/implement-catalog-pages/)
+6. [Creating a product cluster](https://joost.meijles.com/jss_product_cluster/) - Joost Meijles
+7. [Conclusion](/2019/jss-commerce-conclusion/)
+
 There are two ways to use Sitecore Commerce with JSS:
 
  - Use Sitecore Commerce Connect and create a custom endpoint that runs on Sitecore XP

@@ -6,6 +6,7 @@ aboutPage: false
 
 markdown: kramdown
 highlighter: rouge
+excerpt_separator: "<!--more-->"
 
 paginate: 20
 baseurl: /
