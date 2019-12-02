@@ -5,7 +5,7 @@ date: 2018-07-27 13:21
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, extend, customer, commerce
-visual: /assets/images/extend-customer/visual.jpg
+visual: extend-customer.jpg
 categories: [Sitecore]
 ---
 Multiple times I've seen people ask how to extend a SXC9 customer on the sitecore commerce slack channel. Suprisingly, it seems that this is not documented anywhere. We have already done this in our projects at Aviva Solutions, so I decided to write down how we do this. Full credits need to go to my colleague [Joost Meijles](https://twitter.com/joostmeijles), who figured this all out. 

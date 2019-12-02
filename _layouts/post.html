@@ -4,7 +4,7 @@ layout: postlayout
 
 <article class="post">
     {% if page.visual %}
-        <header class="hero-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ page.visual }}');">
+        <header class="hero-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/original/{{ page.visual }}');">
     {% else %}
         <header class="hero-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/noimage.jpg');">
     {% endif %}        
