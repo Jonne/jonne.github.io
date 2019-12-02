@@ -5,6 +5,7 @@ date: 2019-09-18 11:34
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
+visual: /assets/images/implement-catalog-pages/visual.jpg 
 categories: [Sitecore]
 ---
 In this part I will decribe how we implemented the catalog pages. In [part 2](../navigating-the-catalog) I talked about how we implemented navigation with JSS & commerce. However, this only described how we implemented url navigation, e.g. how a URL is mapped to a commerce catalog item. This time we will focus on implementing a category menu, the category page and the product page.

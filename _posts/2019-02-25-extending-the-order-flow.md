@@ -5,6 +5,7 @@ date: 2019-02-25 13:21
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, extend, order flow, commerce
+visual: /assets/images/extend-order-flow/visual.jpg
 categories: [Sitecore]
 ---
 The default Sitecore eXperience Commerce order flow is quite generic and although it is not documented, it is possible to modify it. In this post I will share how to add a custom order state.

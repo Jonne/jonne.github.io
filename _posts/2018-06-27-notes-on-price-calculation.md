@@ -5,6 +5,7 @@ date: 2018-06-27 13:21
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, pricing, listprice, sellprice, commerce
+visual: /assets/images/price-calculation/visual.jpg
 categories: [Sitecore]
 ---
 Today I needed to sort sellable items based on the listprice, which required me to do a deep dive into the SXC9 price calculation. This turned out to be not that trivial, so here are my notes:

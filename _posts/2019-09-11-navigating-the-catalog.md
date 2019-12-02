@@ -5,6 +5,7 @@ date: 2019-09-11 10:14
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
+visual: /assets/images/navigating-the-catalog/visual.jpg 
 categories: [Sitecore]
 ---
 In [part 1](../exposing-the-commerce-engine) I described how we chose to expose the Commerce Engine in our JSS commerce experiment. In this part I will talk about how we implemented catalog navigation. 

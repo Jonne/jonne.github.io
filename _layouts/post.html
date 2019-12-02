@@ -1,15 +1,25 @@
 ---
-layout: default
+layout: postlayout
 ---
 
 <article class="post">
-    <header>
-        <h1>{{ page.title }}</h1>
-        <h2 class="headline">{{ page.date | date:"%B %-d, %Y" }}</h2>
+    {% if page.visual %}
+        <header class="hero-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ page.visual }}');">
+    {% else %}
+        <header class="hero-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/noimage.jpg');">
+    {% endif %}        
+        <div class="hero-text">        
+            <h1>{{ page.title }}</h1>
+            <h2 class="headline">{{ page.date | date:"%B %-d, %Y" }}</h2>
+        </div>
+        <div class="categories">
+            <ul>
+                {% for category in page.categories %}
+                    <li class='category'>{{ category }}</li>
+                {% endfor %}           
+            </ul>              
+        </div>
     </header>
-    <section id="sharing">
-        {% include share.html %}
-    </section>    
     <section id="post-body">
         {{content}}
     </section>
@@ -17,23 +27,10 @@ layout: default
 
 <!-- Disqus comments -->
 {% if site.disqus %}
-    <div class="archive readmore">
+    <div class="comments">
         <h3>Comments</h3>
         {% include disqus.html %}
     </div>
 {% endif %}
-
-<!-- Archive post list -->
-{% if page.archive %}
-    <ul id="post-list" class="archive readmore">
-        <h3>Read more</h3>
-        {% for post in site.posts %}
-            <li>
-                <a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}">{{ post.title }}<aside class="dates">{{ post.date | date:"%b %d" }}</aside></a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
 
 
