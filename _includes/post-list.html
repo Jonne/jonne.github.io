@@ -1,12 +1,45 @@
 <section id="posts">
-    {% for post in site.posts %}
-        <article class="post-summary">
-            <h1>
-                <a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}">{{ post.title }}</a>
+    {% for post in paginator.posts %}
+        <article class="post-summary flexcol">
+            <div class="thumbnail">
+                {% if post.visual %}
+                    <img src='/assets/images/small/{{ post.visual }}' />
+                {% else %}
+                    <img src='/assets/images/noimage.jpg' />
+                {% endif %}
+                
+                <ul class="categories">
+                    {% for category in post.categories %}
+                        <li class='category'>{{ category }}</li>
+                    {% endfor %}           
+                </ul>                    
+            </div>
+            <div class="content">
+                <a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}">
+                    <h1>{{ post.title }}</h1>   
+                </a>
                 <span><time pubdate="pubdate">{{ post.date | date:"%b %d, %y"" }}</time></span>
-            </h1>
-            {{ post.excerpt }}
-            <a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}" class="cr">Read more</a> 
+                 
+                <div class="summary">{{ post.excerpt }}</div>
+            </div>
         </article>
     {% endfor %}
+
+    <!-- Pagination links -->
+    <div class="pagination">
+    {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path }}" class="previous">
+        Previous</a>
+    {% else %}
+        <span class="previous">Previous</span>
+    {% endif %}
+    <span class="page_number">
+        {{ paginator.page }} of {{ paginator.total_pages }}
+    </span>
+    {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+    {% else %}
+        <span class="next ">Next</span>
+    {% endif %}
+    </div>
 </section>

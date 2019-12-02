@@ -5,6 +5,7 @@ date: 2019-07-19 10:46
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, commerce, security, identity server, authentication, authorization, explained
+visual: commerce-security.jpg
 categories: [Sitecore]
 ---
 Authentication with SXC9 is available in the online documentation, but how does authorization work? And how can you add authorization to your own controller methods? 

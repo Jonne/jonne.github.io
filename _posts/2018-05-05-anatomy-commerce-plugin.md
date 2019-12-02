@@ -6,6 +6,7 @@ date: 2018-05-05 13:21
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, commerce, plugin
+visual: plugin-atonomy.jpg
 categories: [Sitecore]
 ---
 Look at the new Sitecore Experience Commerce 9 engine and you will find that the engine itself is just a shell: the core functionality is implemented as plugins. Extending the engine can be done by creating your own plugins.
