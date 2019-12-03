@@ -5,6 +5,7 @@ date: 2019-10-07 11:13
 author: jonnekats
 comments: true
 keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
+visual: commerce-conclusion.jpg
 categories: [Sitecore]
 ---
 In the past 6 parts of this JSS Commerce series Joost Meijles and me described our experiences developing a basic Sitecore Commerce website with JSS ([Sitecore JavaScript Services](https://jss.sitecore.com)). Most of the articles describe how we implemented a certain feature and why we did it that way. Now that we finished the experiment, we can look back and evaluate using JSS for Sitecore Commerce in a more general way. We will do this by asking ourselves a couple of questions.
