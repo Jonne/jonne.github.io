@@ -51,9 +51,10 @@ nav
 #posts
   margin: 0 auto
   display: flex
-  justify-content: space-between
+  justify-content: center
   flex-wrap: wrap
-  width: 1250px
+  flex-flow: row wrap
+  max-width: 1250px
 
   .pagination
     text-align: center
@@ -141,16 +142,17 @@ article.post
     margin-top: 0px
     
   section#sharing
-    width: 1250px
+    max-width: 1250px 
     margin: 0 auto
 
   section#post-body
     margin-top: 40px
-    width: 1250px
+    max-width: 1250px
     margin: 0 auto    
     color: #333
     line-height: 32px
     font-size: 16px
+    padding: 10px
 
     a
       color: #2e9fff
@@ -239,11 +241,18 @@ blockquote
       font-size: 42px
   
   .categories
-    margin-left: -625px
-    width: 1250px    
-    left: 50%
+    max-width: 1250px
     position: absolute
     bottom: 0
+    
+    @media screen and (max-width: 1249px)
+      left: 0
+      margin-left: 0px
+
+    @media screen and (min-width: 1250px)
+      margin-left: -625px
+      left: 50%
+
     ul
       list-style-type: none
       padding: 0px
@@ -264,7 +273,7 @@ blockquote
 header#minimalmenu
   text-align: center
   padding: 10px 10px 10px 10px
-  width: 700px
+  max-width: 700px
   margin: 0 auto
 
   img
@@ -277,6 +286,10 @@ header#minimalmenu
     text-transform: uppercase
     display: inline-block
     margin-bottom: 0px
+    font-size: 2em
+    @media screen and (max-width: 670px)
+      margin-top: 40px
+
     a
       color: #000000
 
@@ -285,4 +298,4 @@ header#minimalmenu
 
 .comments
     margin: 0 auto
-    width: 1250px
+    max-width: 1250px
