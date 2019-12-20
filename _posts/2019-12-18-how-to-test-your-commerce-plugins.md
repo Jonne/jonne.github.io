@@ -8,19 +8,19 @@ keywords: Sitecore 9, SXC9, commerce, JSS, sitecore, javascript services
 visual: test-commerce-engine.jpg
 categories: [Sitecore]
 ---
-Writing tests is an important part of our work as software developers. Currently, there is no guidance on how to write tests for Sitecore Commerce Engine plugins and there is no straightforward way to do this. ASP.net core makes it possible to write in memory integration tests. In this post I will share how you can use this to test your own Sitecore Commerce Engine plugins.
+Writing tests is an important part of our work as software developers. Currently, there is no guidance on how to write tests for Sitecore Commerce Engine plugins and there is no straightforward way to do this. ASP.net core makes it possible to write in-memory integration tests. In this post I will share how you can use this to test your own Sitecore Commerce Engine plugins.
 
 <!--more-->
 
 For a while I've been struggling to find a way to test custom Sitecore Commerce Engine plugins. One option would be to test against any custom blocks or pipelines directly and fake any dependencies such as other pipelines. This turns out to be not that trivial and there are other dependencies that you need to fake like the `CommerceContext`. As a result the tests don't look pretty and you are still just testing a small part of the functionality. 
-With ASP.net core it got possible to run [integration tests](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-3.1) in memory using a TestServer. At Aviva Solutions we have been successfully using this on other projects and I really wanted to be able to use this for Sitecore Commerce projects as well. What I wanted to do is to run the commerce engine in memory and then swap out the database related pipeline blocks by blocks that persist in memory, so I wouldn't need to setup a database.
+With ASP.net core it got possible to run [integration tests](https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-3.1) in-memory using a TestServer. At Aviva Solutions we have been successfully using this on other projects and I really wanted to be able to use this for Sitecore Commerce projects as well. What I wanted to do is to run the commerce engine in-memory and then swap out the database related pipeline blocks by blocks that persist in-memory, so I wouldn't need to setup a database.
 
-![In memory test server](/assets/images/test-commerce-engine/overview.jpg)
+![in-memory test server](/assets/images/test-commerce-engine/overview.jpg)
 
-The unit test would setup the commerce engine using the `TestServer` and swap out the SQL blocks with in memory blocks. Then it would create an in memory `HttpClient` using the `TestServer` and invoke the API like you would normally do using Postman. It would then assert by checking the API result or by checking what entities were added to the in memory persistency blocks. It turned out running the commerce engine in memory was not that easy, so I will share the challenges I needed to overcome.
+The unit test would setup the commerce engine using the `TestServer` and swap out the SQL blocks with in-memory blocks. Then it would create an in-memory `HttpClient` using the `TestServer` and invoke the API like you would normally do using Postman. It would then assert by checking the API result or by checking what entities were added to the in-memory persistency blocks. It turned out running the commerce engine in-memory was not that easy, so I will share the challenges I needed to overcome.
 
 ## Setup Dependency Context
-Normally when the engine spins up it will bootstrap all the plugins by dynamically searching for all the types that implement the `IConfigureSitecore` interface. It does this by using the .NET core `DependencyContext` class, which can be used to access all referenced assemblies. The commerce engine code that does this uses the default dependency context: `DependencyContext.Default`. However, `DependencyContext.Default` uses `Assembly.GetEntryAssembly()` to do this. A unit test project is based on a Class Library and in a Class Library the entry assembly is always null. Because of this, the in memory commerce engine would not find any plugins. I've tried swapping out the code that used the `DependendyContext`, but this was not possible without modifying the default startup code, which I didn't want to do. I was able to fix this by applying the hack I found in [this article](https://dejanstojanovic.net/aspnet/2015/january/set-entry-assembly-in-unit-testing-methods/), which sets the entry assembly using reflection:
+Normally when the engine spins up it will bootstrap all the plugins by dynamically searching for all the types that implement the `IConfigureSitecore` interface. It does this by using the .NET core `DependencyContext` class, which can be used to access all referenced assemblies. The commerce engine code that does this uses the default dependency context: `DependencyContext.Default`. However, `DependencyContext.Default` uses `Assembly.GetEntryAssembly()` to do this. A unit test project is based on a Class Library and in a Class Library the entry assembly is always null. Because of this, the in-memory commerce engine would not find any plugins. I've tried swapping out the code that used the `DependendyContext`, but this was not possible without modifying the default startup code, which I didn't want to do. I was able to fix this by applying the hack I found in [this article](https://dejanstojanovic.net/aspnet/2015/january/set-entry-assembly-in-unit-testing-methods/), which sets the entry assembly using reflection:
 
 ``` csharp
         private static void SetEntryAssembly<T>()
@@ -45,7 +45,7 @@ Normally when the engine spins up it will bootstrap all the plugins by dynamical
 This is not pretty, but it works. I will take this up with support, to see if they can make this more extensible, allowing you to hook into this mechanism from the tests.
 
 ## Authentication and authorization
-The Sitecore Commerce Engine uses [Identity Server](https://identityserver.io/) for authentication and authorization, I've shared my notes on the details in an [earlier post](/2019/sitecore-commerce-security-explained/). A client can either authenticate by passing a certificate thumbprint in an http header, or by providing a bearer token which is handed out by Identity Server. At first the certificate thumbprint seemed like the easiest route, but in order to use that you will need to install a certificate on the machine on which the tests are running, which was a show stopper to me. I started to explore the bearer token route and stumbled on [this excellent stackoverflow answer](https://stackoverflow.com/a/40559393/1003817), which described how you can run an in memory version of Identity server and use back channel handlers to have the Commerce Engine communicate with that in memory version. To configure Identity Server I added the Identity Server nuget package to my test project and created a fake startup class:
+The Sitecore Commerce Engine uses [Identity Server](https://identityserver.io/) for authentication and authorization, I've shared my notes on the details in an [earlier post](/2019/sitecore-commerce-security-explained/). A client can either authenticate by passing a certificate thumbprint in an http header, or by providing a bearer token which is handed out by Identity Server. At first the certificate thumbprint seemed like the easiest route, but in order to use that you will need to install a certificate on the machine on which the tests are running, which was a show stopper to me. I started to explore the bearer token route and stumbled on [this excellent stackoverflow answer](https://stackoverflow.com/a/40559393/1003817), which described how you can run an in-memory version of Identity server and use back channel handlers to have the Commerce Engine communicate with that in-memory version. To configure Identity Server I added the Identity Server nuget package to my test project and created a fake startup class:
 
 ``` csharp
     public class IdentityServerStartup
@@ -124,7 +124,7 @@ This startup class simulates the normal Sitecore Identity Server behavior, by us
     AccessToken = tokenResponse.AccessToken;
 ```
 
-Now the Commerce Engine needs to be configured to use this in memory Identity Server to validate the access token:
+Now the Commerce Engine needs to be configured to use this in-memory Identity Server to validate the access token:
 
 ``` csharp
     var identityServerHandler = identityServer.CreateHandler();
@@ -181,7 +181,7 @@ new WebHostBuilder()
         }.UseStartup<Startup>();
 ```
 
-Now we want to replace the SQL pipeline blocks with in memory ones. So far I needed to replace the following blocks:
+Now we want to replace the SQL pipeline blocks with in-memory ones. So far I needed to replace the following blocks:
 
 * FindEntity
 * FindEntitiesInList
@@ -221,7 +221,7 @@ As an example this is the implemenation of my InMemory find entity block:
     }
 ```
 
-Instead of going to the database it uses an in memory store to find entities:
+Instead of going to the database it uses an in-memory store to find entities:
 
 ``` csharp
 
@@ -248,7 +248,7 @@ Instead of going to the database it uses an in memory store to find entities:
     }
 ```
 
-This in memory store can be resolved from the TestServer and can be used to add entities to setup the test data. All we have to do is register the custom block:
+This in-memory store can be resolved from the TestServer and can be used to add entities to setup the test data. All we have to do is register the custom block:
 
 ``` csharp
     new WebHostBuilder()
