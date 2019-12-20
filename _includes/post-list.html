@@ -28,8 +28,13 @@
     <!-- Pagination links -->
     <div class="pagination">
     {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path }}/" class="previous">
-        Previous</a>
+        {% if paginator.previous_page == 1 %}
+            <a href="/" class="previous">
+            Previous</a>
+        {% else %}    
+            <a href="{{ paginator.previous_page_path }}/" class="previous">
+            Previous</a>        
+        {% endif %}
     {% else %}
         <span class="previous">Previous</span>
     {% endif %}
