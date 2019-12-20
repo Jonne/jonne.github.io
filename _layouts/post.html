@@ -21,7 +21,8 @@ layout: postlayout
         </div>
     </header>
     <section id="post-body">
-        {{content}}
+        <div class="introduction">{{ page.excerpt }}</div>
+        {{ page.content | remove: page.excerpt }}
     </section>
 </article>
 
